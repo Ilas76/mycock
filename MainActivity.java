@@ -26,5 +26,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void readContacts() {
+        ContentResolver contentResolver=getContentResolver();
+        Cursor cursor=contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null);
+        if (cursor.moveToFirst()){
+            do {
+                Log.i("iiiii", (cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))));
+                Log.i("iiiii", (cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+                if ("work".equals(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)) )) {
+                    Log.e("EEEEEE", "WORK");
+                }
+            }while (cursor.moveToNext());
 
+        }
+    }
 }
